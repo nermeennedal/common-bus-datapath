@@ -1,0 +1,19 @@
+module Sequence_Counter( CLK , CLR , INC , COUNT,reset );
+    input CLK;          // Clock signal
+    input CLR,reset;          // Clear signal
+    input INC;          // Increment signal
+    output reg [3:0] COUNT;  // 4-bit counter output
+
+    always @(posedge CLK or posedge reset) begin
+	if(reset)begin
+	    COUNT <= 4'b1111;
+	end
+       else if (CLR) begin
+            COUNT <= 4'b0000; // Reset count to 0 on clear T0 is active
+        end else if (INC) begin
+            COUNT <= COUNT + 1; // Increment count on increment signal
+        end
+    end
+
+endmodule
+
